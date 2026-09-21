@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">Dinossauro verde lendo um livro</title>
+  <desc id="descricao">Ilustracao infantil de um dinossauro verde sentado ao lado de um livro aberto.</desc>
+  <ellipse cx="180" cy="198" rx="132" ry="13" fill="#d8d5f7"/>
+  <path d="M73 157c-18-13-25-34-16-48 8-12 25-14 40-6l25 13-12 20-22-8c-7-3-12 4-7 9l18 18z" fill="#46b889"/>
+  <path d="M105 154c-8-32 4-64 31-82 25-17 63-18 89-3 24 14 38 39 34 64-4 27-29 43-63 43h-44c-20 0-41-7-47-22z" fill="#65c99a" stroke="#2b9670" stroke-width="4"/>
+  <path d="M128 80c-4-21 3-43 20-56 7-5 17-1 17 8v18c11-9 25-14 39-14 11 0 16 13 7 20l-17 13c18 5 32 17 39 34-24-12-50-15-75-8z" fill="#65c99a" stroke="#2b9670" stroke-width="4"/>
+  <path d="M143 56l-7-18c-3-8 7-14 13-8l13 14zM177 45l4-20c2-9 14-9 17 0l3 19zM211 50l14-16c6-7 17 0 13 9l-8 18z" fill="#ffbf69" stroke="#d98c42" stroke-width="3"/>
+  <circle cx="202" cy="72" r="6" fill="#2b2a3d"/>
+  <circle cx="204" cy="70" r="2" fill="#fff"/>
+  <path d="M220 89c-7 7-16 8-24 3" fill="none" stroke="#2b2a3d" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="221" cy="85" r="4" fill="#f08b8b" opacity=".7"/>
+  <path d="M158 112c-10 1-18 8-22 17M183 109c9 3 15 10 17 19" fill="none" stroke="#2b9670" stroke-width="6" stroke-linecap="round"/>
+  <path d="M130 174v19M218 174v19" stroke="#2b9670" stroke-width="8" stroke-linecap="round"/>
+  <path d="M118 190h25M207 190h25" stroke="#2b9670" stroke-width="8" stroke-linecap="round"/>
+  <path d="M103 155l-22 28M238 151l21 28" stroke="#2b9670" stroke-width="7" stroke-linecap="round"/>
+  <path d="M78 143c16 2 32 10 45 22" fill="none" stroke="#2b9670" stroke-width="5" stroke-linecap="round"/>
+  <path d="M132 154l48-18 48 18-48 18z" fill="#fff5d6" stroke="#d98c42" stroke-width="3"/>
+  <path d="M180 136v36M144 158l36 14 36-14" fill="none" stroke="#d98c42" stroke-width="2"/>
+  <path d="M150 155l21-7M150 161l18-6M190 149l21 7M194 155l17 6" stroke="#e2c37f" stroke-width="2" stroke-linecap="round"/>
+</svg>

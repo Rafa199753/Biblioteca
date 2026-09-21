@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual Infantil - Comunidade</title>
+    <style>
+        :root {
+            --cor-primaria: #6d5ef6;
+            --cor-primaria-escura: #4d3fd9;
+            --cor-secundaria: #ffb454;
+            --cor-fundo: #fffaf3;
+            --cor-card: #ffffff;
+            --cor-texto: #2b2a3d;
+            --cor-suave: #eef2ff;
+            --cor-verde: #22b181;
+            --cor-rosa: #ff7aa3;
+            --cor-amarelo: #ffd76a;
+            --cor-azul: #68d0ff;
+            --sombra-suave: 0 18px 40px rgba(109, 94, 246, 0.12);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255, 183, 103, 0.22), transparent 18%),
+                radial-gradient(circle at 90% 8%, rgba(255, 122, 163, 0.18), transparent 20%),
+                radial-gradient(circle at 50% 100%, rgba(104, 208, 255, 0.12), transparent 22%),
+                linear-gradient(180deg, #f9f4ff 0%, #fdfaf5 100%);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 28px 20px 40px;
+            overflow-x: hidden;
+        }
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        body::before {
+            top: -80px;
+            right: -40px;
+            background: rgba(255, 192, 96, 0.22);
+        }
+        body::after {
+            bottom: -50px;
+            left: -30px;
+            background: rgba(104, 208, 255, 0.18);
+        }
+        header {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto 28px;
+            padding: 28px 20px 18px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255, 214, 106, 0.28), rgba(255, 122, 163, 0.18), rgba(104, 208, 255, 0.2));
+            border: 1px solid rgba(109, 94, 246, 0.08);
+            box-shadow: var(--sombra-suave);
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(109, 94, 246, 0.12);
+            color: var(--cor-primaria-escura);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        header h1 {
+            margin: 0 0 10px;
+            color: var(--cor-primaria-escura);
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            line-height: 1.1;
+            text-shadow: 0 2px 0 rgba(255,255,255,0.7);
+        }
+        header p {
+            margin: 0 auto;
+            max-width: 700px;
+            font-size: 1.08rem;
+            color: #4d5367;
+            line-height: 1.7;
+        }
+        .barra-pesquisa {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 0 auto 26px;
+            max-width: 1100px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(109, 94, 246, 0.08);
+            border-radius: 20px;
+            box-shadow: var(--sombra-suave);
+            backdrop-filter: blur(6px);
+        }
+        .barra-pesquisa input,
+        .barra-pesquisa select {
+            padding: 13px 15px;
+            width: min(100%, 360px);
+            border: 1px solid #d6dbee;
+            border-radius: 14px;
+            font-size: 16px;
+            background: white;
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.02);
+        }
+        .barra-pesquisa button,
+        .formulario button,
+        .limpar-filtro {
+            padding: 13px 22px;
+            background: linear-gradient(135deg, var(--cor-primaria), #7e6df7);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+            box-shadow: 0 10px 24px rgba(91, 74, 227, 0.2);
+        }
+        .barra-pesquisa button:hover,
+        .formulario button:hover,
+        .limpar-filtro:hover {
+            transform: translateY(-2px) scale(1.01);
+            filter: brightness(1.02);
+            box-shadow: 0 16px 30px rgba(91, 74, 227, 0.22);
+        }
+        .limpar-filtro {
+            background: linear-gradient(135deg, #eef2ff, #e5e7eb);
+            color: #374151;
+            box-shadow: none;
+        }
+        .limpar-filtro:hover {
+            background: linear-gradient(135deg, #e5ebff, #dde5f0);
+        }
+        .formulario {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto 32px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,219,0.9));
+            padding: 28px 24px 20px;
+            border-radius: 24px;
+            box-shadow: var(--sombra-suave);
+            border: 1px solid rgba(109,94,246,0.08);
+            animation: fadeUp 0.6s ease both;
+        }
+        .formulario h2 {
+            margin-top: 0;
+            color: var(--cor-primaria);
+            text-align: center;
+            font-size: 1.7rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .campo label {
+            font-weight: 700;
+            color: #374151;
+        }
+        .campo input,
+        .campo textarea,
+        .campo select {
+            padding: 12px 13px;
+            border: 1px solid #dbe3f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #fff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .campo input:focus,
+        .campo textarea:focus,
+        .campo select:focus {
+            outline: none;
+            border-color: rgba(91, 74, 227, 0.6);
+            box-shadow: 0 0 0 4px rgba(91, 74, 227, 0.08);
+        }
+        .campo textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+        .grid-livros {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+        .card-livro {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(109, 94, 246, 0.08);
+            transform: translateY(0);
+            opacity: 1;
+            animation: fadeUp 0.5s ease both;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .card-livro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 42px rgba(109, 94, 246, 0.12);
+            border-color: rgba(109, 94, 246, 0.2);
+        }
+        .card-livro h3 {
+            margin: 0 0 10px;
+            color: var(--cor-primaria);
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+        .categoria {
+            display: inline-block;
+            background: rgba(91, 74, 227, 0.08);
+            color: var(--cor-primaria);
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+        }
+        .descricao {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 18px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        .btn-ler {
+            display: inline-block;
+            text-align: center;
+            background: linear-gradient(135deg, var(--cor-verde), #2ec59e);
+            color: white;
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .btn-ler:hover {
+            opacity: 0.96;
+            transform: translateY(-1px);
+        }
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .btn-acoes {
+            flex: 1;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+        .btn-acoes:hover {
+            filter: brightness(0.98);
+            transform: translateY(-1px);
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .btn-editar {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        .btn-excluir {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-badge">Biblioteca Infantil</div>
+        <h1>📚 Cantinho da Leitura</h1>
+        <p>Livros e materiais educativos para inspirar a curiosidade, a imaginação e o prazer de aprender.</p>
+    </header>
+
+    <div class="barra-pesquisa">
+        <input type="text" id="inputBusca" placeholder="Pesquisar por título ou autor...">
+        <select id="categoriaFiltro">
+            <option value="">Todas as categorias</option>
+            <option value="Infantojuvenil">Infantojuvenil</option>
+            <option value="Geral">Geral</option>
+            <option value="Educativo">Educativo</option>
+            <option value="História">História</option>
+        </select>
+        <button onclick="carregarLivros()">Pesquisar</button>
+        <button class="limpar-filtro" type="button" onclick="limparFiltros()">Limpar</button>
+        <a id="linkLogin" href="/login" class="limpar-filtro" style="text-decoration:none; display:inline-block;">Entrar como admin</a>
+        <a id="linkLogout" href="/logout" class="limpar-filtro" style="display:none; text-decoration:none;">Sair</a>
+    </div>
+
+    <div id="bannerAdmin" style="display:none; max-width: 900px; margin: 0 auto 18px; padding: 12px 16px; border-radius: 12px; background: rgba(34, 177, 129, 0.12); color: #0f6a4d; font-weight: 700; text-align: center; border: 1px solid rgba(34,177,129,0.2);">
+        Acesso administrativo ativo.
+    </div>
+
+    <section class="formulario" id="secaoFormulario" style="display:none;">
+        <h2 id="tituloFormulario">Adicionar novo livro</h2>
+        <form id="formLivro">
+            <input type="hidden" id="livroIdEditando" value="">
+            <div class="form-grid">
+                <div class="campo">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+                <div class="campo">
+                    <label for="autor">Autor(a)</label>
+                    <input type="text" id="autor" name="autor">
+                </div>
+                <div class="campo">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria">
+                        <option value="Infantojuvenil">Infantojuvenil</option>
+                        <option value="Geral">Geral</option>
+                        <option value="Educativo">Educativo</option>
+                        <option value="História">História</option>
+                    </select>
+                </div>
+                <div class="campo" style="grid-column: 1 / -1;">
+                    <label for="arquivo_url">URL do arquivo</label>
+                    <input type="url" id="arquivo_url" name="arquivo_url" required>
+                </div>
+                <div class="campo" style="grid-column: 1 / -1;">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" placeholder="Descreva o livro..."></textarea>
+                </div>
+            </div>
+            <div style="margin-top: 15px; text-align: center;">
+                <button type="submit" id="botaoSalvarLivro">Salvar livro</button>
+            </div>
+        </form>
+    </section>
+
+    <div class="grid-livros" id="gridLivros">
+        <!-- Os livros do banco de dados aparecerão aqui automaticamente -->
+    </div>
+
+    <script>
+        const API_URL = '/api/livros';
+        let usuarioLogado = false;
+
+        async function verificarSessao() {
+            try {
+                const resposta = await fetch('/api/session');
+                const dados = await resposta.json();
+                usuarioLogado = !!dados.logged_in;
+
+                const secaoFormulario = document.getElementById('secaoFormulario');
+                const bannerAdmin = document.getElementById('bannerAdmin');
+                const linkLogin = document.getElementById('linkLogin');
+                const linkLogout = document.getElementById('linkLogout');
+
+                if (usuarioLogado) {
+                    secaoFormulario.style.display = 'block';
+                    bannerAdmin.style.display = 'block';
+                    linkLogin.style.display = 'none';
+                    linkLogout.style.display = 'inline-block';
+                } else {
+                    secaoFormulario.style.display = 'none';
+                    bannerAdmin.style.display = 'none';
+                    linkLogin.style.display = 'inline-block';
+                    linkLogout.style.display = 'none';
+                }
+            } catch (erro) {
+                console.error('Erro ao verificar sessão:', erro);
+            }
+        }
+
+        function limparFiltros() {
+            document.getElementById('inputBusca').value = '';
+            document.getElementById('categoriaFiltro').value = '';
+            carregarLivros();
+        }
+
+        function resetarFormularioLivro() {
+            document.getElementById('formLivro').reset();
+            document.getElementById('livroIdEditando').value = '';
+            document.getElementById('tituloFormulario').textContent = 'Adicionar novo livro';
+            document.getElementById('botaoSalvarLivro').textContent = 'Salvar livro';
+        }
+
+        async function preencherFormularioEdicao(id) {
+            try {
+                const resposta = await fetch(`${API_URL}/${id}`);
+                const livro = await resposta.json();
+
+                if (!resposta.ok) {
+                    throw new Error('Livro não encontrado.');
+                }
+
+                document.getElementById('livroIdEditando').value = livro.id;
+                document.getElementById('titulo').value = livro.titulo;
+                document.getElementById('autor').value = livro.autor;
+                document.getElementById('categoria').value = livro.categoria;
+                document.getElementById('descricao').value = livro.descricao || '';
+                document.getElementById('arquivo_url').value = livro.arquivo_url;
+                document.getElementById('tituloFormulario').textContent = 'Editar livro';
+                document.getElementById('botaoSalvarLivro').textContent = 'Atualizar livro';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (erro) {
+                console.error('Erro ao carregar livro para edição:', erro);
+                alert('Não foi possível carregar o livro para edição.');
+            }
+        }
+
+        async function carregarLivros() {
+            const termoBusca = document.getElementById('inputBusca').value;
+            const categoria = document.getElementById('categoriaFiltro').value;
+            let url = API_URL;
+            const parametros = new URLSearchParams();
+
+            if (termoBusca) {
+                parametros.append('busca', termoBusca);
+            }
+            if (categoria) {
+                parametros.append('categoria', categoria);
+            }
+
+            const queryString = parametros.toString();
+            if (queryString) {
+                url += `?${queryString}`;
+            }
+
+            try {
+                const resposta = await fetch(url);
+                const livros = await resposta.json();
+                
+                const grid = document.getElementById('gridLivros');
+                grid.innerHTML = ''; // Limpa a lista anterior
+
+                if (livros.length === 0) {
+                    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Nenhum livro encontrado.</p>';
+                    return;
+                }
+
+                livros.forEach(livro => {
+                    const card = document.createElement('div');
+                    card.className = 'card-livro';
+                    card.innerHTML = `
+                        <div>
+                            <span class="categoria">${livro.categoria}</span>
+                            <h3>${livro.titulo}</h3>
+                            <p><strong>Autor(a):</strong> ${livro.autor}</p>
+                            <p class="descricao">${livro.descricao || 'Sem descrição informada.'}</p>
+                        </div>
+                        <a href="${livro.arquivo_url}" target="_blank" class="btn-ler">📖 Ler / Baixar Livro</a>
+                        <div class="card-actions">
+                            <button type="button" class="btn-acoes btn-editar" data-id="${livro.id}">Editar</button>
+                            <button type="button" class="btn-acoes btn-excluir" data-id="${livro.id}">Excluir</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                if (usuarioLogado) {
+                    document.querySelectorAll('.btn-editar').forEach(botao => {
+                        botao.addEventListener('click', async function () {
+                            await preencherFormularioEdicao(this.dataset.id);
+                        });
+                    });
+
+                    document.querySelectorAll('.btn-excluir').forEach(botao => {
+                        botao.addEventListener('click', async function () {
+                            const id = this.dataset.id;
+                            const confirmar = confirm('Deseja realmente excluir este livro?');
+                            if (!confirmar) return;
+
+                            try {
+                                const resposta = await fetch(`${API_URL}/${id}`, {
+                                    method: 'DELETE'
+                                });
+
+                                const resultado = await resposta.json();
+                                if (!resposta.ok) {
+                                    throw new Error(resultado.erro || 'Erro ao excluir livro.');
+                                }
+
+                                alert('Livro excluído com sucesso!');
+                                carregarLivros();
+                            } catch (erro) {
+                                console.error('Erro ao excluir livro:', erro);
+                                alert(erro.message);
+                            }
+                        });
+                    });
+                }
+
+                if (!usuarioLogado) {
+                    document.querySelectorAll('.btn-editar, .btn-excluir').forEach(botao => {
+                        botao.style.display = 'none';
+                    });
+                }
+            } catch (erro) {
+                console.error('Erro ao carregar os livros:', erro);
+                alert('Não foi possível conectar ao servidor da biblioteca.');
+            }
+        }
+
+        document.getElementById('formLivro').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const dados = {
+                titulo: document.getElementById('titulo').value,
+                autor: document.getElementById('autor').value || 'Desconhecido',
+                categoria: document.getElementById('categoria').value,
+                descricao: document.getElementById('descricao').value,
+                arquivo_url: document.getElementById('arquivo_url').value,
+            };
+
+            const livroId = document.getElementById('livroIdEditando').value;
+            const metodo = livroId ? 'PUT' : 'POST';
+            const url = livroId ? `${API_URL}/${livroId}` : API_URL;
+
+            try {
+                const resposta = await fetch(url, {
+                    method: metodo,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                const resultado = await resposta.json();
+
+                if (!resposta.ok) {
+                    throw new Error(resultado.erro || 'Erro ao salvar livro.');
+                }
+
+                alert(livroId ? 'Livro atualizado com sucesso!' : 'Livro cadastrado com sucesso!');
+                resetarFormularioLivro();
+                carregarLivros();
+            } catch (erro) {
+                console.error('Erro ao salvar livro:', erro);
+                alert(erro.message);
+            }
+        });
+
+        // Carregar os livros automaticamente assim que a página abrir
+        verificarSessao();
+        carregarLivros();
+    </script>
+</body>
+</html>
