@@ -152,14 +152,14 @@
         </form>
     </div>
 
-    <!-- Script de validação local -->
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const statusDiv = document.getElementById('status');
+    <!-- Script de validação local e tratamento de erro -->
+    <script> 
+        const loginForm = document.getElementById('loginForm'); 
+        const statusDiv = document.getElementById('status'); 
 
-        loginForm.addEventListener('submit', async function(event) {
+        loginForm.addEventListener('submit', async function(event) { 
             event.preventDefault();
-
+ 
             statusDiv.textContent = '';
 
             try {
@@ -190,6 +190,7 @@
             }
         });
     </script>
+
 
 </body>
 </html>
