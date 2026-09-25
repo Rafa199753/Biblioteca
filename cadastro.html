@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Entrar - Biblioteca Infantil</title>
+
+    <title>Criar conta - Cantinho da Leitura</title>
+
     <style>
       :root {
         --cor-primaria: #6d5ef6;
         --cor-primaria-escura: #4d3fd9;
-        --cor-secundaria: #ffb454;
         --cor-texto: #2b2a3d;
         --cor-verde: #22b181;
         --cor-erro: #c03952;
@@ -24,8 +25,10 @@
         place-items: center;
         margin: 0;
         padding: 24px;
+
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         color: var(--cor-texto);
+
         background: radial-gradient(
             circle at 10% 10%,
             rgba(255, 183, 103, 0.28),
@@ -46,220 +49,264 @@
 
       .container {
         width: min(100%, 440px);
+
         padding: 38px 34px 32px;
+
         border: 1px solid rgba(109, 94, 246, 0.1);
         border-radius: 30px;
-        background: rgba(255, 255, 255, 0.94);
-        box-shadow: 0 18px 40px rgba(109, 94, 246, 0.12);
-        animation: aparecer 0.5s ease;
-      }
 
-      .marca {
-        margin: 0 0 8px;
-        color: var(--cor-primaria-escura);
-        font-size: 2rem;
-        text-align: center;
+        background: rgba(255, 255, 255, 0.94);
+
+        box-shadow: 0 18px 40px rgba(109, 94, 246, 0.12);
       }
 
       .ilustracao-dinossauro {
         display: block;
-        width: min(100%, 250px);
-        height: auto;
+
+        width: min(100%, 230px);
+
         margin: -18px auto 8px;
       }
 
+      h1 {
+        margin: 0 0 8px;
+
+        color: var(--cor-primaria-escura);
+
+        text-align: center;
+      }
+
       .descricao {
-        margin: 0 0 28px;
+        margin-bottom: 26px;
+
         color: #5d6072;
-        line-height: 1.6;
+
+        line-height: 1.5;
+
         text-align: center;
       }
 
       form {
         display: grid;
+
         gap: 18px;
       }
 
       label {
         display: grid;
+
         gap: 8px;
-        color: var(--cor-texto);
+
         font-weight: 800;
       }
 
       input {
         width: 100%;
+
         padding: 13px 14px;
+
         border: 1px solid #dfe3f0;
         border-radius: 12px;
-        color: var(--cor-texto);
-        background: #fff;
+
         font: inherit;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
       input:focus {
         outline: none;
+
         border-color: var(--cor-primaria);
+
         box-shadow: 0 0 0 4px rgba(109, 94, 246, 0.12);
       }
 
       button {
-        margin-top: 4px;
-        padding: 14px 16px;
+        padding: 14px;
+
         border: 0;
         border-radius: 12px;
-        color: #fff;
+
+        color: white;
+
         background: linear-gradient(
           135deg,
           var(--cor-primaria),
           var(--cor-primaria-escura)
         );
-        box-shadow: 0 12px 24px rgba(109, 94, 246, 0.2);
+
         font: inherit;
         font-weight: 800;
+
         cursor: pointer;
-        transition: transform 0.2s ease, filter 0.2s ease;
       }
 
       button:hover {
         filter: brightness(1.05);
-        transform: translateY(-1px);
       }
 
       .status {
         min-height: 24px;
-        margin-top: 2px;
-        font-weight: 700;
+
         text-align: center;
+
+        font-weight: 700;
       }
 
       .sucesso {
         color: var(--cor-verde);
       }
+
       .erro {
         color: var(--cor-erro);
       }
 
-      @keyframes aparecer {
-        from {
-          opacity: 0;
-          transform: translateY(12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+      .login {
+        margin-top: 18px;
 
-      @media (max-width: 480px) {
-        .container {
-          padding: 30px 22px 26px;
-        }
-        .marca {
-          font-size: 1.75rem;
-        }
-      }
-
-      .cadastro {
-        margin-top: 8px;
         text-align: center;
+
         color: #5d6072;
-        font-size: 0.95rem;
       }
 
-      .cadastro a {
-        margin-left: 5px;
+      .login a {
         color: var(--cor-primaria-escura);
+
         font-weight: 800;
+
         text-decoration: none;
       }
 
-      .cadastro a:hover {
+      .login a:hover {
         text-decoration: underline;
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <img
         class="ilustracao-dinossauro"
         src="/static/dinossauro.svg"
-        alt="Dinossauro verde lendo um livro"
+        alt="Dinossauro lendo um livro"
       />
-      <h1 class="marca">📚 Biblioteca Infantil</h1>
-      <p class="descricao">
-        Entre para acessar e administrar os livros da biblioteca.
-      </p>
 
-      <form id="loginForm">
+      <h1>📚 Criar conta</h1>
+
+      <p class="descricao">Cadastre-se para acessar o Cantinho da Leitura.</p>
+
+      <form id="cadastroForm">
         <label>
           Usuário
+
           <input
             type="text"
             id="username"
             name="username"
-            placeholder="admin"
+            placeholder="Escolha um usuário"
+            minlength="3"
             required
           />
         </label>
+
         <label>
           Senha
+
           <input
             type="password"
             id="password"
             name="password"
-            placeholder="123"
+            placeholder="Crie uma senha"
+            minlength="6"
             required
           />
         </label>
-        <button type="submit">Entrar</button>
 
-        <div class="cadastro">
-          <span>Ainda não possui uma conta?</span>
-          <a href="/cadastro">Criar conta</a>
-        </div>
+        <label>
+          Confirmar senha
+
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Digite a senha novamente"
+            minlength="6"
+            required
+          />
+        </label>
+
+        <button type="submit">Criar conta</button>
+
         <div class="status" id="status"></div>
       </form>
+
+      <div class="login">
+        Já possui uma conta?
+
+        <a href="/login"> Entrar </a>
+      </div>
     </div>
 
-    <!-- Script de validação local e tratamento de erro -->
     <script>
-      const loginForm = document.getElementById("loginForm");
+      const cadastroForm = document.getElementById("cadastroForm");
+
       const statusDiv = document.getElementById("status");
 
-      loginForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
+      cadastroForm.addEventListener(
+        "submit",
 
-        statusDiv.textContent = "";
+        async function (event) {
+          event.preventDefault();
 
-        try {
-          const resposta = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              username: document.getElementById("username").value,
-              password: document.getElementById("password").value,
-            }),
-          });
+          statusDiv.textContent = "";
 
-          const dados = await resposta.json();
+          const username = document.getElementById("username").value.trim();
 
-          if (!resposta.ok) {
-            throw new Error(dados.erro || "Usuário ou senha incorretos.");
+          const password = document.getElementById("password").value;
+
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+          if (password !== confirmPassword) {
+            statusDiv.textContent = "As senhas não coincidem.";
+
+            statusDiv.className = "status erro";
+
+            return;
           }
 
-          statusDiv.textContent = "Login efetuado com sucesso!";
-          statusDiv.className = "status sucesso";
+          try {
+            const resposta = await fetch("/api/cadastro", {
+              method: "POST",
 
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 1000);
-        } catch (erro) {
-          statusDiv.textContent = erro.message;
-          statusDiv.className = "status erro";
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                username: username,
+
+                password: password,
+              }),
+            });
+
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+              throw new Error(dados.erro || "Não foi possível criar a conta.");
+            }
+
+            statusDiv.textContent = "Conta criada com sucesso!";
+
+            statusDiv.className = "status sucesso";
+
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 1200);
+          } catch (erro) {
+            statusDiv.textContent = erro.message;
+
+            statusDiv.className = "status erro";
+          }
         }
-      });
+      );
     </script>
   </body>
 </html>
